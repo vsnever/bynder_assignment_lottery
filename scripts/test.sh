@@ -10,6 +10,9 @@ sleep 1
 
 echo "Running tests..."
 docker compose -f docker-compose.test.yml exec -T app pytest -s --tb=short tests/
+EXIT_CODE=$?
 
 echo "Stopping test environment..."
 docker compose -f docker-compose.test.yml down -v
+
+exit $EXIT_CODE
