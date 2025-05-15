@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+echo "0 0 * * * /usr/local/bin/python /app/scripts/close_and_draw.py -U http://app:8000 -e $LOTTERY_ADMIN_EMAIL -p $LOTTERY_ADMIN_PASSWORD >> /var/log/cron.log 2>&1" > /etc/cron.d/close-lottery
+
+crontab /etc/cron.d/close-lottery
+
+cron -f

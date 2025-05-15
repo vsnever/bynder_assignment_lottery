@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:17.5
+    container_name: bynder_lottery_postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: bynder_lottery_service
+    restart: unless-stopped
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+
+  cron:
+    build: .
+    container_name: bynder_lottery_cron
+    depends_on:
+      - app
+    env_file:
+      - .env
+    entrypoint: ["/bin/bash", "/app/scripts/cronjob"]
+
+volumes:
+  postgres_data:

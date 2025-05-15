@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:17.5
+    env_file:
+      - .env.test
+    ports:
+      - "5432:5432"
+
+  app:
+    build: .
+    depends_on:
+      - db
+    env_file:
+      - .env.test
+    ports:
+      - "8000:8000"
