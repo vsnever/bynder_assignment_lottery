@@ -64,7 +64,7 @@ class PopulateLottery:
 
 def main(base_url:str, admin_email: str, admin_password: str,
          lotteries: int, users: int, ballots_per_user: int,
-         starting_date: date):
+         first_closure_date: date):
     print("Populating demo data...")
 
     populate = PopulateLottery(base_url)
@@ -73,7 +73,7 @@ def main(base_url:str, admin_email: str, admin_password: str,
     admin_token = populate.login_user(admin_email, admin_password)
 
     # Step 2: Create lotteries for the next N days startin today
-    upcoming_dates = [(starting_date + timedelta(days=i)).isoformat() for i in range(lotteries)]
+    upcoming_dates = [(first_closure_date + timedelta(days=i)).isoformat() for i in range(lotteries)]
     for closure_date in upcoming_dates:
         populate.create_lottery(admin_token, closure_date)
 
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     parser.add_argument("-e", "--email", type=str, default="admin@example.com", help="Admin account email")
     parser.add_argument("-p", "--password", type=str, default="admin_password", help="Admin account password")
     parser.add_argument("-U", "--base_url", type=str, default="http://localhost:8000", help="Base URL")
-    parser.add_argument("-s", "--starting_date", type=date, default=date.today(), help="Base URL")
+    parser.add_argument("-d", "--first_closure_date", type=date, default=date.today(), help="First closure date of the created lotteries")
     args = parser.parse_args()
 
-    main(args.base_url, args.email, args.password, args.lotteries, args.users, args.ballots, args.starting_date)
+    main(args.base_url, args.email, args.password, args.lotteries, args.users, args.ballots, args.first_closure_date)
