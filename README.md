@@ -135,7 +135,7 @@ Return access token. Token validity is set in the `.env` file.
 - `GET /lotteries/YYYY-MM-DD/winner`: Get winning ballot for the lottery by its closure date
 
 - `POST /lotteries`: Create a new lottery.
-Admin privileges required (expects OAuth2 token).
+Admin privileges required (expects OAuth 2.0 token).
 Example json payload:
     ```
     {
@@ -146,19 +146,19 @@ Example json payload:
 
 - `POST /lotteries/close_and_draw/?lottery_date=YYYY-MM-DD`:
 Close the lottery and draw a winner.
-Admin privileges required (expects OAuth2 token).
+Admin privileges required (expects OAuth 2.0 token).
 
 -  `POST /ballots/?lottery_date=YYYY-MM-DD`:
 Submit a new ballot for the lottery by its closure date.
-Authentication required (expects OAuth2 token).
+Authentication required (expects OAuth 2.0 token).
 
 -  `GET /ballots/mine:`:
 Get all ballots submitted by the current user.
-Authentication required (expects OAuth2 token).
+Authentication required (expects OAuth 2.0 token).
 
 -   `GET /ballots/lottery/YYYY-MM-DD`:
 Get all ballots submitted for the lottery by its closure date.
-Admin privileges required (expects OAuth2 token).
+Admin privileges required (expects OAuth 2.0 token).
 
 ### API Documentation
 
