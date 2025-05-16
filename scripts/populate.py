@@ -1,5 +1,5 @@
 """
-1. Populates the database with the -l lotteries for the next -l days starting with date -s.
+1. Populates the database with the -l lotteries for the next -l days starting with date -d.
 2. Creates -u users.
 3. Each user randomly sumbits -b ballots for the lotteries.
 
