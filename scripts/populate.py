@@ -64,7 +64,7 @@ class PopulateLottery:
 
 def main(base_url:str, admin_email: str, admin_password: str,
          lotteries: int, users: int, ballots_per_user: int,
-         first_closure_date: date):
+         first_closure_date: date, first_user_num: int):
     print("Populating demo data...")
 
     populate = PopulateLottery(base_url)
@@ -78,7 +78,7 @@ def main(base_url:str, admin_email: str, admin_password: str,
         populate.create_lottery(admin_token, closure_date)
 
     # Step 3: Create users and simulate ballot submissions
-    for i in range(1, users + 1):
+    for i in range(first_user_num, users + first_user_num):
         username = f"user{i}"
         email = f"user{i}@example.com"
         populate.register_user(username, email)
@@ -101,6 +101,9 @@ if __name__ == "__main__":
     parser.add_argument("-p", "--password", type=str, default="admin_password", help="Admin account password")
     parser.add_argument("-U", "--base_url", type=str, default="http://localhost:8000", help="Base URL")
     parser.add_argument("-d", "--first_closure_date", type=date, default=date.today(), help="First closure date of the created lotteries")
+    parser.add_argument("-n", "--first_user_num", type=int, default=1, help="First user number to start from")
     args = parser.parse_args()
 
-    main(args.base_url, args.email, args.password, args.lotteries, args.users, args.ballots, args.first_closure_date)
+    main(args.base_url, args.email, args.password,
+         args.lotteries, args.users, args.ballots,
+         args.first_closure_date, args.first_user_num)
